@@ -1,16 +1,26 @@
 var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
 
 var schema = mongoose.Schema({
 
+  login: {
+    type: String,
+    required: true,
+    index: {
+      unique: true
+    }
+  },
   nome: {
     type: String,
-    required: true
+    require: true
   },
-  senha: {
-    type: String,
-    required: true
+
+  inclusao: {
+    type: Date,
+    default: Date.now
   }
 
 });
 
+schema.plugin(findOrCreate);
 mongoose.model('Usuario', schema);
